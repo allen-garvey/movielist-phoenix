@@ -8,7 +8,8 @@ defmodule Movielist.Admin.Rating do
   schema "ratings" do
     field :date_scored, :date
     field :score, :integer
-    field :movie_id, :id
+    
+    belongs_to :movie, Movielist.Admin.Movie
 
     timestamps()
   end
