@@ -14,6 +14,8 @@ defmodule Movielist.Admin.Movie do
 
     belongs_to :genre, Movielist.Admin.Genre
 
+    has_many :ratings, Movielist.Admin.Rating
+
     timestamps()
   end
 
