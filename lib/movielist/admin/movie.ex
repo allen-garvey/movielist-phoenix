@@ -11,7 +11,8 @@ defmodule Movielist.Admin.Movie do
     field :pre_rating, :integer
     field :theater_release_date, :date
     field :title, :string
-    field :genre_id, :id
+
+    belongs_to :genre, Movielist.Admin.Genre
 
     timestamps()
   end
