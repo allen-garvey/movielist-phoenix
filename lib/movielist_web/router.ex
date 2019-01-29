@@ -19,6 +19,7 @@ defmodule MovielistWeb.Router do
     get "/", PageController, :index
 
     resources "/genres", GenreController
+    resources "/movies", MovieController
   end
 
   # Other scopes may use custom stacks.
