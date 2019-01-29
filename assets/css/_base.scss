@@ -1,0 +1,28 @@
+$sans_serif_font_family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$serif_font_family: Times, Georgia, 'Droid Serif', 'Times New Roman', serif;
+$display_font_family: 'Blackout-Sunrise', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$title_font_family: 'Blackout-Midnight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$green : #88e884;
+$yellow : #ffe100;
+$red : #ff3237;
+$blue : steelblue;
+
+body{
+	font-family: $serif_font_family;
+	font-size : 19.2px;
+	color: black;
+}
+
+main{
+	padding-bottom: 3em;
+}
+
+nav li{
+	font-family: $display_font_family;
+	font-size: 1.414em;
+	margin-left: 10px;
+}
+
+h1,h2,h3,h4,button{
+	font-family: $sans_serif_font_family;
+}
