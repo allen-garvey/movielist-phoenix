@@ -14,9 +14,9 @@
       <h1 class='main_title'><%= link "Movie List", to: Routes.page_path(@conn, :index) %></h1>
       <nav>
         <ul class='nav nav-pills'>
-          <li data-nav='home'><%= link "Main", to: Routes.page_path(@conn, :index) %></li>
+          <li data-nav='home'><%= link "Main", to: Routes.movie_path(@conn, :index) %></li>
           <li data-nav='suggestions'><%= link "Suggestions", to: Routes.page_path(@conn, :index) %></li>
-          <li data-nav='rated'><%= link "Ratings", to: Routes.page_path(@conn, :index) %></li>
+          <li data-nav='rated'><%= link "Ratings", to: Routes.rating_path(@conn, :index) %></li>
           <li><%= link "Add Movie", to: Routes.page_path(@conn, :index), class: "btn btn-primary add_button" %></li>
         </ul>
       </nav>
