@@ -1,0 +1,30 @@
+/*
+* Modal Styles
+*/
+.modal-header{
+	background-color: $blue;
+	color : white;
+}
+.modal-footer{
+	border-top: none;
+	p{
+		text-align: left;
+	}
+}
+
+.add .hide-for-add, .add #activate_form{
+	display: none;
+}
+.edit .hide-for-edit{
+	display: none;
+}
+label{
+	margin-bottom: 0;
+	font-family: $sans_serif_font_family;
+}
+
+#activate_form{
+	display: inline-block;
+	position: relative;
+	top: -49px;
+}
