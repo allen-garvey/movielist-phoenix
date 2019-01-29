@@ -128,4 +128,65 @@ defmodule Movielist.AdminTest do
       assert %Ecto.Changeset{} = Admin.change_movie(movie)
     end
   end
+
+  describe "ratings" do
+    alias Movielist.Admin.Rating
+
+    @valid_attrs %{date_scored: ~D[2010-04-17], score: 42}
+    @update_attrs %{date_scored: ~D[2011-05-18], score: 43}
+    @invalid_attrs %{date_scored: nil, score: nil}
+
+    def rating_fixture(attrs \\ %{}) do
+      {:ok, rating} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Admin.create_rating()
+
+      rating
+    end
+
+    test "list_ratings/0 returns all ratings" do
+      rating = rating_fixture()
+      assert Admin.list_ratings() == [rating]
+    end
+
+    test "get_rating!/1 returns the rating with given id" do
+      rating = rating_fixture()
+      assert Admin.get_rating!(rating.id) == rating
+    end
+
+    test "create_rating/1 with valid data creates a rating" do
+      assert {:ok, %Rating{} = rating} = Admin.create_rating(@valid_attrs)
+      assert rating.date_scored == ~D[2010-04-17]
+      assert rating.score == 42
+    end
+
+    test "create_rating/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Admin.create_rating(@invalid_attrs)
+    end
+
+    test "update_rating/2 with valid data updates the rating" do
+      rating = rating_fixture()
+      assert {:ok, %Rating{} = rating} = Admin.update_rating(rating, @update_attrs)
+      assert rating.date_scored == ~D[2011-05-18]
+      assert rating.score == 43
+    end
+
+    test "update_rating/2 with invalid data returns error changeset" do
+      rating = rating_fixture()
+      assert {:error, %Ecto.Changeset{}} = Admin.update_rating(rating, @invalid_attrs)
+      assert rating == Admin.get_rating!(rating.id)
+    end
+
+    test "delete_rating/1 deletes the rating" do
+      rating = rating_fixture()
+      assert {:ok, %Rating{}} = Admin.delete_rating(rating)
+      assert_raise Ecto.NoResultsError, fn -> Admin.get_rating!(rating.id) end
+    end
+
+    test "change_rating/1 returns a rating changeset" do
+      rating = rating_fixture()
+      assert %Ecto.Changeset{} = Admin.change_rating(rating)
+    end
+  end
 end

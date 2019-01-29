@@ -20,6 +20,7 @@ defmodule MovielistWeb.Router do
 
     resources "/genres", GenreController
     resources "/movies", MovieController
+    resources "/ratings", RatingController
   end
 
   # Other scopes may use custom stacks.
