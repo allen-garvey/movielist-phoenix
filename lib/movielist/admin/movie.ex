@@ -22,5 +22,6 @@ defmodule Movielist.Admin.Movie do
     |> cast(attrs, [:title, :genre_id, :theater_release_date, :home_release_date, :pre_rating, :is_active])
     |> validate_required([:title, :genre_id, :pre_rating, :is_active])
     |> ModelHelpers.validate_score(:pre_rating)
+    |> assoc_constraint(:genre)
   end
 end
