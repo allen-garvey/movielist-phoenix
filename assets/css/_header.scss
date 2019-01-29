@@ -23,3 +23,8 @@ h1.main_title{
 	padding-left: 15px;
 	padding-right: 15px;
 }
+
+//override bootstrap for nav buttons
+.nav>li>a.btn-primary:focus, .nav>li>a.btn-primary:hover{
+	background-color: #265a88;
+}
