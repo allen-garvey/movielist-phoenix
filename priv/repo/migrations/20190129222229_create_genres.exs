@@ -3,7 +3,7 @@ defmodule Movielist.Repo.Migrations.CreateGenres do
 
   def change do
     create table(:genres) do
-      add :name, :text
+      add :name, :text, null: false
 
       timestamps()
     end
