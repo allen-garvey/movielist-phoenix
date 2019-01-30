@@ -4,6 +4,12 @@ defmodule MovielistWeb.MovieController do
   alias Movielist.Admin
   alias Movielist.Admin.Movie
 
+  def related_fields() do
+    [
+      genres: Admin.list_genres() |> MovielistWeb.GenreView.map_for_form,
+    ]
+  end
+
   def index(conn, _params) do
     movies = Admin.list_movies()
     render(conn, "index.html", movies: movies)
@@ -11,7 +17,7 @@ defmodule MovielistWeb.MovieController do
 
   def new(conn, _params) do
     changeset = Admin.change_movie(%Movie{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
   def create(conn, %{"movie" => movie_params}) do
@@ -22,7 +28,7 @@ defmodule MovielistWeb.MovieController do
         |> redirect(to: Routes.movie_path(conn, :show, movie))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", [changeset: changeset] ++ related_fields())
     end
   end
 
@@ -34,7 +40,7 @@ defmodule MovielistWeb.MovieController do
   def edit(conn, %{"id" => id}) do
     movie = Admin.get_movie!(id)
     changeset = Admin.change_movie(movie)
-    render(conn, "edit.html", movie: movie, changeset: changeset)
+    render(conn, "edit.html", [movie: movie, changeset: changeset] ++ related_fields())
   end
 
   def update(conn, %{"id" => id, "movie" => movie_params}) do
@@ -47,7 +53,7 @@ defmodule MovielistWeb.MovieController do
         |> redirect(to: Routes.movie_path(conn, :show, movie))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", movie: movie, changeset: changeset)
+        render(conn, "edit.html", [movie: movie, changeset: changeset] ++ related_fields())
     end
   end
 

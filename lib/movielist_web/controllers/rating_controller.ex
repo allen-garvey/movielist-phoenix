@@ -4,6 +4,12 @@ defmodule MovielistWeb.RatingController do
   alias Movielist.Admin
   alias Movielist.Admin.Rating
 
+  def related_fields() do
+    [
+      movies: Admin.list_movies() |> MovielistWeb.MovieView.map_for_form,
+    ]
+  end
+
   def index(conn, _params) do
     ratings = Admin.list_ratings()
     render(conn, "index.html", ratings: ratings)
@@ -11,7 +17,7 @@ defmodule MovielistWeb.RatingController do
 
   def new(conn, _params) do
     changeset = Admin.change_rating(%Rating{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
   def create(conn, %{"rating" => rating_params}) do
@@ -22,7 +28,7 @@ defmodule MovielistWeb.RatingController do
         |> redirect(to: Routes.rating_path(conn, :show, rating))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", [changeset: changeset] ++ related_fields())
     end
   end
 
@@ -34,7 +40,7 @@ defmodule MovielistWeb.RatingController do
   def edit(conn, %{"id" => id}) do
     rating = Admin.get_rating!(id)
     changeset = Admin.change_rating(rating)
-    render(conn, "edit.html", rating: rating, changeset: changeset)
+    render(conn, "edit.html", [rating: rating, changeset: changeset] ++ related_fields())
   end
 
   def update(conn, %{"id" => id, "rating" => rating_params}) do
@@ -47,7 +53,7 @@ defmodule MovielistWeb.RatingController do
         |> redirect(to: Routes.rating_path(conn, :show, rating))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", rating: rating, changeset: changeset)
+        render(conn, "edit.html", [rating: rating, changeset: changeset] ++ related_fields())
     end
   end
 
