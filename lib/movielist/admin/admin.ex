@@ -18,7 +18,7 @@ defmodule Movielist.Admin do
 
   """
   def list_genres do
-    Repo.all(Genre)
+    Repo.all(from(Genre, order_by: :name))
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule Movielist.Admin do
 
   """
   def list_movies do
-    Repo.all(Movie)
+    Repo.all(from(Movie, order_by: [:sort_title, :id]))
   end
 
   @doc """
@@ -210,7 +210,7 @@ defmodule Movielist.Admin do
 
   """
   def list_ratings do
-    Repo.all(Rating)
+    Repo.all(from(Rating, order_by: [desc: :id]))
   end
 
   @doc """
