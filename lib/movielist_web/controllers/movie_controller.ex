@@ -59,10 +59,11 @@ defmodule MovielistWeb.MovieController do
 
   def delete(conn, %{"id" => id}) do
     movie = Admin.get_movie!(id)
+    item_name = MovielistWeb.MovieView.to_s(movie)
     {:ok, _movie} = Admin.delete_movie(movie)
 
     conn
-    |> put_flash(:info, "Movie deleted successfully.")
+    |> put_flash(:info, "#{item_name} deleted successfully.")
     |> redirect(to: Routes.movie_path(conn, :index))
   end
 end
