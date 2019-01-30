@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Sort title:</strong>
+    <%= @movie.sort_title %>
+  </li>
+
+  <li>
     <strong>Theater release date:</strong>
     <%= @movie.theater_release_date %>
   </li>

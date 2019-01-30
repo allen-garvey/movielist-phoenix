@@ -4,6 +4,7 @@ defmodule Movielist.Repo.Migrations.CreateMovies do
   def change do
     create table(:movies) do
       add :title, :text, null: false
+      add :sort_title, :text, null: false
       add :theater_release_date, :date
       add :home_release_date, :date
       add :pre_rating, :integer, null: false
