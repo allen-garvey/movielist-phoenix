@@ -5,11 +5,7 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= textarea f, :name %>
-  <%= error_tag f, :name %>
+  <%= MovielistWeb.SharedView.form_group :name, f, &text_input/3 %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= MovielistWeb.SharedView.submit_button "Genre" %>
 <% end %>

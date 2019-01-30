@@ -5,15 +5,17 @@
     </div>
   <% end %>
 
-  <%= label f, :date_scored %>
-  <%= date_select f, :date_scored %>
-  <%= error_tag f, :date_scored %>
+  <%= MovielistWeb.SharedView.form_group :movie_id, f, @movies, &select/4 %>
+  
+  <%= MovielistWeb.SharedView.form_group :date_scored, f, &date_input/3 %>
 
-  <%= label f, :score %>
-  <%= number_input f, :score %>
-  <%= error_tag f, :score %>
+  <%= MovielistWeb.SharedView.form_group :score, f, &number_input/3 %>
 
-  <div>
-    <%= submit "Save" %>
-  </div>
+  <%= if !is_nil(assigns[:referrer]) do
+      hidden_input(f, :referrer, name: :referrer, value: assigns[:referrer])
+    end
+  %>
+
+  <%= MovielistWeb.SharedView.submit_button "Rating" %>
+
 <% end %>
