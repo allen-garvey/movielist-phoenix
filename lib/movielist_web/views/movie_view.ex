@@ -11,4 +11,14 @@ defmodule MovielistWeb.MovieView do
   def map_for_form(movies) do
     Enum.map(movies, &{to_s(&1), &1.id})
   end
+
+  @doc """
+  String representation of active status
+  """
+  def is_active_status(is_active) do
+    case is_active do
+      true  -> "Active"
+      false -> "Inactive"
+    end
+  end
 end
