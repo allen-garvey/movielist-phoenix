@@ -16,6 +16,9 @@ defmodule MovielistWeb.SharedView do
   	Takes date or datetime and
   	returns string date in format MM-DD-YYYY
   	"""
+  	def us_formatted_date(nil) do
+		nil
+	end
 	def us_formatted_date(datetime) do
 		String.pad_leading(Integer.to_string(datetime.month), 2, "0") <> 
 		"/" <>
