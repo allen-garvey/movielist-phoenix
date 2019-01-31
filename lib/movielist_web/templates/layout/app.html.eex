@@ -14,7 +14,7 @@
       <h1 class='main_title'><%= link "Movie List", to: Routes.page_path(@conn, :index) %></h1>
       <nav>
         <ul class='nav nav-pills'>
-          <li><%= link "Main", to: Routes.movie_path(@conn, :index) %></li>
+          <li><%= link "Movies", to: Routes.movie_path(@conn, :index) %></li>
           <li><%= link "Suggestions", to: Routes.page_path(@conn, :index) %></li>
           <li><%= link "Ratings", to: Routes.rating_path(@conn, :index) %></li>
           <li><%= link "Genres", to: Routes.genre_path(@conn, :index) %></li>
