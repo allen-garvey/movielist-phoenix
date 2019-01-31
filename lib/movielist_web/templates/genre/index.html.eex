@@ -1,11 +1,10 @@
-<h1>Listing Genres</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
 
-      <th></th>
+      <th><%= link "Add Genre", to: Routes.genre_path(@conn, :new), class: "btn btn-primary" %></th>
     </tr>
   </thead>
   <tbody>
@@ -14,13 +13,12 @@
       <td><%= genre.name %></td>
 
       <td>
-        <%= link "Show", to: Routes.genre_path(@conn, :show, genre) %>
-        <%= link "Edit", to: Routes.genre_path(@conn, :edit, genre) %>
-        <%= link "Delete", to: Routes.genre_path(@conn, :delete, genre), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Show", to: Routes.genre_path(@conn, :show, genre), class: "btn btn-xs btn-default" %>
+        <%= link "Edit", to: Routes.genre_path(@conn, :edit, genre), class: "btn btn-xs btn-primary" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Genre", to: Routes.genre_path(@conn, :new) %></span>
+
