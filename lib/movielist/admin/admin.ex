@@ -114,7 +114,7 @@ defmodule Movielist.Admin do
 
   """
   def list_movies do
-    Repo.all(from(Movie, order_by: [:sort_title, :id]))
+    Repo.all(from(m in Movie, join: genre in assoc(m, :genre), preload: [genre: genre], order_by: [:sort_title, :id]))
   end
 
   @doc """
@@ -210,7 +210,7 @@ defmodule Movielist.Admin do
 
   """
   def list_ratings do
-    Repo.all(from(Rating, order_by: [desc: :id]))
+    Repo.all(from(r in Rating, join: movie in assoc(r, :movie), preload: [movie: movie], order_by: [desc: :id]))
   end
 
   @doc """
