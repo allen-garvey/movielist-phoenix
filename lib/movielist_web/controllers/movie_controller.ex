@@ -12,7 +12,7 @@ defmodule MovielistWeb.MovieController do
 
   def index(conn, _params) do
     movies = Admin.list_movies()
-    render(conn, "index.html", movies: movies)
+    render(conn, "index.html", movies: movies, page_atom: :movies_index)
   end
 
   def new(conn, _params) do

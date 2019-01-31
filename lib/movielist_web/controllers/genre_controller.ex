@@ -6,7 +6,7 @@ defmodule MovielistWeb.GenreController do
 
   def index(conn, _params) do
     genres = Admin.list_genres()
-    render(conn, "index.html", genres: genres)
+    render(conn, "index.html", genres: genres, page_atom: :genres_index)
   end
 
   def new(conn, _params) do

@@ -12,7 +12,7 @@ defmodule MovielistWeb.RatingController do
 
   def index(conn, _params) do
     ratings = Admin.list_ratings()
-    render(conn, "index.html", ratings: ratings)
+    render(conn, "index.html", ratings: ratings, page_atom: :ratings_index)
   end
 
   def new(conn, _params) do
