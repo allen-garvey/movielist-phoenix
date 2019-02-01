@@ -14,7 +14,6 @@
 
       <td>
         <%= link "Show", to: Routes.genre_path(@conn, :show, genre), class: "btn btn-xs btn-default" %>
-        <%= link "Edit", to: Routes.genre_path(@conn, :edit, genre), class: "btn btn-xs btn-primary" %>
       </td>
     </tr>
 <% end %>

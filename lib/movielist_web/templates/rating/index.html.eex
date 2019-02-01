@@ -18,7 +18,6 @@
 
       <td>
         <%= link "Show", to: Routes.rating_path(@conn, :show, rating), class: "btn btn-xs btn-default" %>
-        <%= link "Edit", to: Routes.rating_path(@conn, :edit, rating), class: "btn btn-xs btn-primary" %>
       </td>
     </tr>
 <% end %>
