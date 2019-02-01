@@ -10,8 +10,13 @@
 <ul>
 
   <li>
+    <strong>Movie:</strong>
+    <%= link MovielistWeb.MovieView.to_s(@rating.movie), to: Routes.movie_path(@conn, :show, @rating.movie) %>
+  </li>
+
+  <li>
     <strong>Date scored:</strong>
-    <%= @rating.date_scored %>
+    <%= MovielistWeb.SharedView.us_formatted_date(@rating.date_scored) %>
   </li>
 
   <li>
