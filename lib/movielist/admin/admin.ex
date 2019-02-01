@@ -7,6 +7,8 @@ defmodule Movielist.Admin do
   alias Movielist.Repo
 
   alias Movielist.Admin.Genre
+  alias Movielist.Admin.Movie
+  alias Movielist.Admin.Rating
 
   @doc """
   Returns the list of genres.
@@ -102,8 +104,6 @@ defmodule Movielist.Admin do
     Genre.changeset(genre, %{})
   end
 
-  alias Movielist.Admin.Movie
-
   @doc """
   Returns the list of movies.
 
@@ -131,7 +131,10 @@ defmodule Movielist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_movie!(id), do: Repo.get!(Movie, id)
+  def get_movie!(id) do
+    from(m in Movie, join: genre in assoc(m, :genre), join: ratings in assoc(m, :ratings), where: m.id == ^id, preload: [genre: genre, ratings: ratings])
+    |> Repo.one!
+  end
 
   @doc """
   Creates a movie.
@@ -198,8 +201,6 @@ defmodule Movielist.Admin do
     Movie.changeset(movie, %{})
   end
 
-  alias Movielist.Admin.Rating
-
   @doc """
   Returns the list of ratings.
 
@@ -227,7 +228,10 @@ defmodule Movielist.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_rating!(id), do: Repo.get!(Rating, id)
+  def get_rating!(id) do
+    from(r in Rating, join: movie in assoc(r, :movie), where: r.id == ^id, preload: [movie: movie])
+    |> Repo.one!
+  end
 
   @doc """
   Creates a rating.
