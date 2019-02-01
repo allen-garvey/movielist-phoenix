@@ -1,4 +1,11 @@
-<h1>Show Movie</h1>
+<%= render(MovielistWeb.SharedView, "show_header.html", 
+      conn: @conn, 
+      resource_title_plural: "Movies", 
+      resource_path_atom: :movie_path, 
+      item: @movie, 
+      item_name: to_s(@movie)
+    ) 
+%>
 
 <ul>
 
@@ -34,5 +41,3 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.movie_path(@conn, :edit, @movie) %></span>
-<span><%= link "Back", to: Routes.movie_path(@conn, :index) %></span>
