@@ -20,6 +20,11 @@
   </li>
 
   <li>
+    <strong>Genre:</strong>
+    <%= link MovielistWeb.GenreView.to_s(@movie.genre), to: Routes.genre_path(@conn, :show, @movie.genre) %>
+  </li>
+
+  <li>
     <strong>Theater release date:</strong>
     <%= @movie.theater_release_date %>
   </li>
@@ -41,3 +46,11 @@
 
 </ul>
 
+<h2>Ratings</h2>
+<ul>
+  <%= for rating <- @movie.ratings do %>
+    <li>
+      <%= link MovielistWeb.RatingView.to_s_short(rating), to: Routes.rating_path(@conn, :show, rating) %>
+    </li>
+  <% end %>
+</ul>
