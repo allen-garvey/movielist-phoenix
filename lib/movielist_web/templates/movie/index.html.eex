@@ -8,7 +8,7 @@
       <th>Theater release date</th>
       <th>Home release date</th>
       <th>Pre rating</th>
-      <th>Is active</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
