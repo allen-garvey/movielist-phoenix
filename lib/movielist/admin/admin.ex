@@ -202,6 +202,14 @@ defmodule Movielist.Admin do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset{}` with is_active property changed
+  """
+  def change_movie_is_active(movie_changeset, is_active) when is_boolean(is_active) do
+    movie_changeset
+    |> Ecto.Changeset.put_change(:is_active, is_active)
+  end
+
+  @doc """
   Returns the list of ratings.
 
   ## Examples

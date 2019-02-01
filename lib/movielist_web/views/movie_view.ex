@@ -21,4 +21,14 @@ defmodule MovielistWeb.MovieView do
       false -> "Inactive"
     end
   end
+
+  @doc """
+  CSS class for button of movie show pages to change active status
+  """
+  def active_button_class(is_active) do
+    case is_active do
+      true  -> "btn-primary"
+      false -> "btn-default"
+    end
+  end
 end
