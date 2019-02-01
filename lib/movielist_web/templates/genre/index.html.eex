@@ -2,6 +2,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
 
       <th><%= link "Add Genre", to: Routes.genre_path(@conn, :new), class: "btn btn-primary" %></th>
@@ -10,6 +11,7 @@
   <tbody>
 <%= for genre <- @genres do %>
     <tr>
+      <td></td>
       <td><%= genre.name %></td>
 
       <td>

@@ -2,6 +2,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Title</th>
       <th>Genre</th>
       <th>Theater release date</th>
@@ -14,6 +15,7 @@
   <tbody>
     <%= for movie <- @movies do %>
       <tr>
+        <td></td>
         <td><%= movie.title %></td>
         <td><%= MovielistWeb.GenreView.to_s(movie.genre) %></td>
         <td><%= MovielistWeb.SharedView.us_formatted_date(movie.theater_release_date) %></td>

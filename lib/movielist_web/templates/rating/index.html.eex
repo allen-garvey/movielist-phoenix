@@ -2,6 +2,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Movie</th>
       <th>Date scored</th>
       <th>Score</th>
@@ -12,6 +13,7 @@
   <tbody>
 <%= for rating <- @ratings do %>
     <tr>
+      <td></td>
       <td><%= MovielistWeb.MovieView.to_s(rating.movie) %></td>
       <td><%= MovielistWeb.SharedView.us_formatted_date(rating.date_scored) %></td>
       <td><%= rating.score %></td>
