@@ -7,7 +7,7 @@
       <th>Date scored</th>
       <th>Score</th>
 
-      <th><%= link "New Rating", to: Routes.rating_path(@conn, :new), class: "btn btn-primary" %></th>
+      <th><%= link "New Rating", to: Routes.rating_path(@conn, :new), class: "btn btn-success" %></th>
     </tr>
   </thead>
   <tbody>
