@@ -21,6 +21,8 @@ defmodule MovielistWeb.Router do
     resources "/genres", GenreController
     resources "/movies", MovieController
     resources "/ratings", RatingController
+
+    get "/movies/:movie_id/ratings/new", RatingController, :new
   end
 
   # Other scopes may use custom stacks.

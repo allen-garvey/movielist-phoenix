@@ -15,20 +15,33 @@ defmodule MovielistWeb.RatingController do
     render(conn, "index.html", ratings: ratings, page_atom: :ratings_index)
   end
 
+  def new(conn, %{"movie_id" => movie_id}) do
+    changeset = Admin.change_rating_with_movie(%Rating{}, movie_id)
+    render(conn, "new.html", [changeset: changeset, referrer: "movie"] ++ related_fields())
+  end
+
   def new(conn, _params) do
     changeset = Admin.change_rating(%Rating{})
     render(conn, "new.html", [changeset: changeset] ++ related_fields())
   end
 
+  def create(conn, %{"rating" => rating_params, "referrer" => "movie"}) do
+    create_action(conn, rating_params, fn (conn, rating) -> Routes.movie_path(conn, :show, rating.movie_id) end, "movie")
+  end
+
   def create(conn, %{"rating" => rating_params}) do
+    create_action(conn, rating_params, fn (conn, rating) -> Routes.rating_path(conn, :show, rating) end)
+  end
+
+  def create_action(conn, rating_params, success_redirect_callback, referrer \\ nil) when is_function(success_redirect_callback, 2) do
     case Admin.create_rating(rating_params) do
       {:ok, rating} ->
         conn
         |> put_flash(:info, "Rating created successfully.")
-        |> redirect(to: Routes.rating_path(conn, :show, rating))
+        |> redirect(to: success_redirect_callback.(conn, rating))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", [changeset: changeset] ++ related_fields())
+        render(conn, "new.html", [changeset: changeset, referrer: referrer] ++ related_fields())
     end
   end
 

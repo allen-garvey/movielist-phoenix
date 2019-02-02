@@ -51,6 +51,9 @@
 </ul>
 
 <h2>Ratings</h2>
+<div class="btn_group">
+  <%= link "Add rating", to: Routes.rating_path(@conn, :new, @movie.id), class: "btn btn-success" %>
+</div>
 <ul>
   <%= for rating <- @movie.ratings do %>
     <li>
