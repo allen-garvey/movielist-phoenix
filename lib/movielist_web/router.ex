@@ -17,6 +17,7 @@ defmodule MovielistWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/movies/active", MovieController, :index_active #has to be before resources or conflicts with show pages
 
     resources "/genres", GenreController
     resources "/movies", MovieController

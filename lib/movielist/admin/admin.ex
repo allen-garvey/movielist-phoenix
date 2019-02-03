@@ -118,6 +118,20 @@ defmodule Movielist.Admin do
   end
 
   @doc """
+  Returns the list of active along with calculated release dates movies.
+
+  ## Examples
+
+      iex> list_movies()
+      [%Movie{}, ...]
+
+  """
+  def list_movies_active do
+    from(m in Movie, join: genre in assoc(m, :genre), where: m.is_active == true, preload: [genre: genre], order_by: [:sort_title, :id])
+    |> Repo.all
+  end
+
+  @doc """
   Gets a single movie.
 
   Raises `Ecto.NoResultsError` if the Movie does not exist.
