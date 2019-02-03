@@ -73,3 +73,11 @@ config :movielist, Movielist.Repo,
   database: "movielist_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Legacy php repo
+config :movielist, Movielist.RepoLegacy,
+  username: "postgres",
+  password: "postgres",
+  database: "movielist_legacy",
+  hostname: "localhost",
+  pool_size: 10
