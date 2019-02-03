@@ -5,7 +5,6 @@ defmodule Teamster.Models.LegacyGenre do
 
   @primary_key {:genre_id, :integer, []}
   schema "m_genre" do
-    # field :genre_id, :integer
     field :title, :string
   end
 
