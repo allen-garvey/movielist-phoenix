@@ -127,7 +127,12 @@ defmodule Movielist.Admin do
 
   """
   def list_movies_active do
-    from(m in Movie, join: genre in assoc(m, :genre), where: m.is_active == true, preload: [genre: genre], order_by: [:sort_title, :id])
+    from(
+          m in Movie, 
+          join: genre in assoc(m, :genre), 
+          where: m.is_active == true, preload: [genre: genre], 
+          order_by: [fragment("release_status"), :sort_title, :id], 
+          select: %{movie: m, release_status: fragment("CASE WHEN ? <= CURRENT_DATE THEN 1 WHEN ? <= CURRENT_DATE THEN 2 ELSE 3 END AS release_status", m.home_release_date, m.theater_release_date)})
     |> Repo.all
   end
 

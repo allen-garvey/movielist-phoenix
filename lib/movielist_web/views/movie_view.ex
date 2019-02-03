@@ -31,4 +31,12 @@ defmodule MovielistWeb.MovieView do
       false -> "btn-default"
     end
   end
+
+  def css_class_for_release_status(release_status) do
+    case release_status do
+      3 -> "tr_error"
+      2 -> "tr_warning"
+      1 -> "tr_primary"
+    end
+  end
 end

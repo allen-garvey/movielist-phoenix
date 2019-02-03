@@ -26,13 +26,13 @@ td, th{
 th{
 	font-weight: normal;
 }
-.dvd_released, .good{
+.tr_primary{
 	background-color: $green;
 }
-.theater_released, .ok{
+.tr_warning{
 	background-color: $yellow;
 }
-.unreleased, .bad{
+.tr_error{
 	background-color: $red;
 }
 
