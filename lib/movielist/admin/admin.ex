@@ -10,6 +10,9 @@ defmodule Movielist.Admin do
   alias Movielist.Admin.Movie
   alias Movielist.Admin.Rating
 
+  #Estimated time in days between movies theater release and home release
+  @movie_home_release_estimated_lead_time 110
+
   @doc """
   Returns the list of genres.
 
@@ -131,8 +134,13 @@ defmodule Movielist.Admin do
           m in Movie, 
           join: genre in assoc(m, :genre), 
           where: m.is_active == true, preload: [genre: genre], 
-          order_by: [fragment("release_status"), :sort_title, :id], 
-          select: %{movie: m, release_status: fragment("CASE WHEN ? <= CURRENT_DATE THEN 1 WHEN ? <= CURRENT_DATE THEN 2 ELSE 3 END AS release_status", m.home_release_date, m.theater_release_date)})
+          order_by: [fragment("release_status"), fragment("release_date"), :sort_title, :id], 
+          select: %{
+                    movie: m, 
+                    release_status: fragment("CASE WHEN ? <= CURRENT_DATE THEN 1 WHEN ? <= CURRENT_DATE THEN 2 ELSE 3 END AS release_status", m.home_release_date, m.theater_release_date),
+                    #can't use release_status in release_date without subquery, and can't have nested maps or structs in ecto subqueries, so easiest just to repeat release_status logic here
+                    release_date: fragment("CASE WHEN ? <= CURRENT_DATE THEN NULL WHEN ? <= CURRENT_DATE THEN COALESCE(?, ? + INTERVAL '? DAY') ELSE COALESCE(?, ?) END AS release_date", m.home_release_date, m.theater_release_date, m.home_release_date, m.theater_release_date, @movie_home_release_estimated_lead_time, m.theater_release_date, m.home_release_date)
+                    })
     |> Repo.all
   end
 
