@@ -20,6 +20,11 @@ defmodule MovielistWeb.MovieController do
     render(conn, "index_active.html", movies: movies, page_atom: :movies_index)
   end
 
+  def index_suggestions(conn, _params) do
+    movies = Admin.list_movies_suggestions()
+    render(conn, "index_active.html", movies: movies, page_atom: :movies_suggestions)
+  end
+
   def new(conn, _params) do
     changeset = Admin.change_movie(%Movie{})
     render(conn, "new.html", [changeset: changeset] ++ related_fields())

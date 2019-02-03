@@ -122,19 +122,33 @@ defmodule Movielist.Admin do
 
   @doc """
   Returns the list of active along with calculated release dates movies.
-
-  ## Examples
-
-      iex> list_movies()
-      [%Movie{}, ...]
-
   """
   def list_movies_active do
     from(
           m in Movie, 
           join: genre in assoc(m, :genre), 
-          where: m.is_active == true, preload: [genre: genre], 
+          where: m.is_active == true, 
+          preload: [genre: genre], 
           order_by: [fragment("release_status"), fragment("release_date"), :sort_title, :id], 
+          select: %{
+                    movie: m, 
+                    release_status: fragment("CASE WHEN ? <= CURRENT_DATE THEN 1 WHEN ? <= CURRENT_DATE THEN 2 ELSE 3 END AS release_status", m.home_release_date, m.theater_release_date),
+                    #can't use release_status in release_date without subquery, and can't have nested maps or structs in ecto subqueries, so easiest just to repeat release_status logic here
+                    release_date: fragment("CASE WHEN ? <= CURRENT_DATE THEN NULL WHEN ? <= CURRENT_DATE THEN COALESCE(?, ? + INTERVAL '? DAY') ELSE COALESCE(?, ?) END AS release_date", m.home_release_date, m.theater_release_date, m.home_release_date, m.theater_release_date, @movie_home_release_estimated_lead_time, m.theater_release_date, m.home_release_date)
+                    })
+    |> Repo.all
+  end
+
+  @doc """
+  Similar to list_movies_active, but returns only movies that have been released and has slightly different sorting
+  """
+  def list_movies_suggestions do
+    from(
+          m in Movie, 
+          join: genre in assoc(m, :genre), 
+          where: m.is_active == true and fragment("(? <= CURRENT_DATE OR ? <= CURRENT_DATE)", m.home_release_date, m.theater_release_date), 
+          preload: [genre: genre], 
+          order_by: [asc: fragment("release_status"), desc: m.pre_rating, desc: fragment("release_date"), asc: :sort_title, asc: :id], 
           select: %{
                     movie: m, 
                     release_status: fragment("CASE WHEN ? <= CURRENT_DATE THEN 1 WHEN ? <= CURRENT_DATE THEN 2 ELSE 3 END AS release_status", m.home_release_date, m.theater_release_date),
