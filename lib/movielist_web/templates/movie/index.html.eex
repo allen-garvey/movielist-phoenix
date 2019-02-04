@@ -14,7 +14,7 @@
   </thead>
   <tbody>
     <%= for movie <- @movies do %>
-      <tr>
+      <tr class="<%= row_class_for_active_status(movie.is_active) %>">
         <td></td>
         <td><%= movie.title %></td>
         <td><%= MovielistWeb.GenreView.to_s(movie.genre) %></td>

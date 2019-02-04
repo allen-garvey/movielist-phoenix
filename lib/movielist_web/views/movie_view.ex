@@ -32,6 +32,13 @@ defmodule MovielistWeb.MovieView do
     end
   end
 
+  def row_class_for_active_status(is_active) do
+    case is_active do
+      true  -> "tr_primary"
+      false -> "tr_error"
+    end
+  end
+
   def css_class_for_release_status(release_status) do
     case release_status do
       3 -> "tr_error"
