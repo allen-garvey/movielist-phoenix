@@ -14,4 +14,24 @@
     <%= @genre.name %>
   </li>
 
+  <li>
+    <strong>Movie count:</strong>
+    <%= @movie_count %>
+  </li>
+
+  <li>
+    <strong>Rating count:</strong>
+    <%= @rating_count %>
+  </li>
+
+  <li>
+    <strong>Average pre-rating:</strong>
+    <%= MovielistWeb.SharedView.round_decimal(@average_pre_rating) %>
+  </li>
+
+  <li>
+    <strong>Average post-rating:</strong>
+    <%= MovielistWeb.SharedView.round_decimal(@average_score) %>
+  </li>
+
 </ul>

@@ -2,6 +2,7 @@ defmodule MovielistWeb.GenreController do
   use MovielistWeb, :controller
 
   alias Movielist.Admin
+  alias Movielist.Reports
   alias Movielist.Admin.Genre
 
   def index(conn, _params) do
@@ -28,7 +29,14 @@ defmodule MovielistWeb.GenreController do
 
   def show(conn, %{"id" => id}) do
     genre = Admin.get_genre!(id)
-    render(conn, "show.html", genre: genre)
+    movie_stats = Reports.movie_stats_for_genre(id)
+    rating_stats = Reports.rating_stats_for_genre(id)
+    render(conn, "show.html", genre: genre, 
+                              movie_count: movie_stats[:movie_count], 
+                              average_pre_rating: movie_stats[:average_pre_rating],
+                              rating_count: rating_stats[:rating_count],
+                              average_score: rating_stats[:average_score]
+                              )
   end
 
   def edit(conn, %{"id" => id}) do
