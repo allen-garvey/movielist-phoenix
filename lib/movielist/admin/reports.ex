@@ -36,18 +36,24 @@ defmodule Movielist.Reports do
   end
 
   @doc """
+  Base query for ratings by year
+  """
+  def list_ratings_for_year_base_query(year) do
+    Admin.list_ratings_base_query()
+    |> where([r], fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year)
+  end
+
+  @doc """
   Returns list of ratings by year
   """
   def list_ratings_for_year(year, :date) do
-    Admin.list_ratings_base_query()
-    |> where([r], fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year)
+    list_ratings_for_year_base_query(year)
     |> order_by(asc: :date_scored, asc: :id, desc: :score)
     |> Repo.all
   end
 
   def list_ratings_for_year(year, :score) do
-    Admin.list_ratings_base_query()
-    |> where([r], fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year)
+    list_ratings_for_year_base_query(year)
     |> order_by(desc: :score, asc: :date_scored, asc: :id)
     |> Repo.all
   end
