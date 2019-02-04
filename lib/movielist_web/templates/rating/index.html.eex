@@ -12,7 +12,7 @@
   </thead>
   <tbody>
 <%= for rating <- @ratings do %>
-    <tr>
+    <tr class="<%= css_class_for_score(rating.score) %>">
       <td></td>
       <td><%= MovielistWeb.MovieView.to_s(rating.movie) %></td>
       <td><%= MovielistWeb.SharedView.us_formatted_date(rating.date_scored) %></td>

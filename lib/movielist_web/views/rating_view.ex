@@ -12,5 +12,13 @@ defmodule MovielistWeb.RatingView do
   	SharedView.us_formatted_date(rating.date_scored) <> "—" <> Integer.to_string(rating.score)
   end
 
+  def css_class_for_score(score) do
+  	cond do
+  		score >= 85 -> "tr_primary"
+  		score >= 79 -> "tr_warning"
+  		true 		-> "tr_error"
+  	end
+  end
+
 
 end
