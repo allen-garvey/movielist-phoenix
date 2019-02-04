@@ -24,8 +24,8 @@
 	    <tr>
 	      <th></th>
 	      <th>Movie</th>
-	      <th>Date</th>
-	      <th>Score</th>
+	      <th><%= link "Date", to: reports_for_year_path(@conn, @year) %></th>
+	      <th><%= link "Score", to: reports_for_year_path_score_sorted(@conn, @year) %></th>
 	    </tr>
 	  </thead>
 	  <tbody>
