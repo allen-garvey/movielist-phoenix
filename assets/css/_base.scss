@@ -30,3 +30,13 @@ h1,h2,h3,h4,button{
 .alert:empty{
 	display: none;
 }
+
+.spread_content{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.center{
+	text-align: center;
+}
