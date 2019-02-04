@@ -31,7 +31,7 @@ defmodule Movielist.Reports do
   Returns map with count of rated movies for year and their average score
   """
   def rating_stats_for_year(year) do
-    from(r in Rating, join: m in assoc(r, :movie), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, select: %{rating_count: count(r), average_score: avg(r.score)})
+    from(r in Rating, join: m in assoc(r, :movie), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, select: %{rating_count: count(r), average_score: coalesce(avg(r.score), 0)})
     |> Repo.one!
   end
 
