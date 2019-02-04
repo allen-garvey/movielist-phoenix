@@ -250,6 +250,12 @@ defmodule Movielist.Admin do
   end
 
   @doc """
+  Base query to get list of ratings.
+  """
+  def list_ratings_base_query do
+    from(r in Rating, join: movie in assoc(r, :movie), preload: [movie: movie])
+  end
+  @doc """
   Returns the list of ratings.
 
   ## Examples
@@ -259,7 +265,18 @@ defmodule Movielist.Admin do
 
   """
   def list_ratings do
-    Repo.all(from(r in Rating, join: movie in assoc(r, :movie), preload: [movie: movie], order_by: [desc: :id]))
+    list_ratings_base_query()
+    |> order_by(desc: :id)
+    |> Repo.all
+  end
+
+  @doc """
+  Returns the list of sorted by score ratings.
+  """
+  def list_ratings_by_score do
+    list_ratings_base_query()
+    |> order_by(desc: :score, desc: :id)
+    |> Repo.all
   end
 
   @doc """
