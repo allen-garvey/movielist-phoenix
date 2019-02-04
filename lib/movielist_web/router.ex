@@ -20,6 +20,8 @@ defmodule MovielistWeb.Router do
     get "/movies/active", MovieController, :index_active #has to be before resources or conflicts with show pages
     get "/movies/suggestions", MovieController, :index_suggestions #has to be before resources or conflicts with show pages
 
+    get "/reports/:year", ReportsController, :show
+
     resources "/genres", GenreController
     resources "/movies", MovieController
     resources "/ratings", RatingController

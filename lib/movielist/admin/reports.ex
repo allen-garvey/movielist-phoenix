@@ -6,6 +6,7 @@ defmodule Movielist.Reports do
   import Ecto.Query, warn: false
   alias Movielist.Repo
 
+  alias Movielist.Admin
   # alias Movielist.Admin.Genre
   alias Movielist.Admin.Movie
   alias Movielist.Admin.Rating
@@ -24,6 +25,23 @@ defmodule Movielist.Reports do
   def rating_stats_for_genre(genre_id) do
     from(r in Rating, join: m in assoc(r, :movie), where: m.genre_id == ^genre_id, select: %{rating_count: count(r), average_score: avg(r.score)})
     |> Repo.one!
+  end
+
+  @doc """
+  Returns map with count of rated movies for year and their average score
+  """
+  def rating_stats_for_year(year) do
+    from(r in Rating, join: m in assoc(r, :movie), where: fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year, select: %{rating_count: count(r), average_score: avg(r.score)})
+    |> Repo.one!
+  end
+
+  @doc """
+  Returns list of ratings by year
+  """
+  def list_ratings_for_year(year) do
+    Admin.list_ratings_base_query()
+    |> where([r], fragment("EXTRACT(year FROM ?)", r.date_scored) == ^year)
+    |> Repo.all
   end
 
 end

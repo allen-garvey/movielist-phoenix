@@ -251,6 +251,7 @@ defmodule Movielist.Admin do
 
   @doc """
   Base query to get list of ratings.
+  Note also used in reports context
   """
   def list_ratings_base_query do
     from(r in Rating, join: movie in assoc(r, :movie), preload: [movie: movie])
