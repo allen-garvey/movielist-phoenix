@@ -19,14 +19,14 @@ defmodule MovielistWeb.ReportsController do
   def show(conn, %{"year" => year_raw, "sort" => "date"}) do
     case Integer.parse(year_raw) do
       {year, _} -> report_for_year(conn, year, :date)
-      _         -> redirect(conn, to: MovielistWeb.ReportsView.reports_for_current_year_score_sorted_path(conn))
+      _         -> redirect(conn, to: MovielistWeb.ReportsView.reports_for_current_year_date_sorted_path(conn))
     end
   end
 
   def show(conn, %{"year" => year_raw}) do
     case Integer.parse(year_raw) do
       {year, _} -> report_for_year(conn, year, :score)
-      _         -> redirect(conn, to: MovielistWeb.ReportsView.reports_for_current_year_path(conn))
+      _         -> redirect(conn, to: MovielistWeb.ReportsView.reports_for_current_year_score_sorted_path(conn))
     end
   end
 
