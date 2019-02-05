@@ -36,4 +36,13 @@ defmodule MovielistWeb.ReportsView do
     Routes.reports_path(conn, :show, year, sort: sort)
   end
 
+  @doc """
+  Returns database results as json string
+  """
+  def ratings_by_month_to_json(results) do
+    results 
+      |> Enum.map(fn result -> [Integer.to_string(result[:month_number]), result[:count]] end)
+      |> Poison.encode!
+  end
+
 end

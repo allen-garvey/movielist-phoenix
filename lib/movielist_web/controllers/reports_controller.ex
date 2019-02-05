@@ -6,13 +6,15 @@ defmodule MovielistWeb.ReportsController do
   def report_for_year(conn, year, sort) when is_integer(year) and is_atom(sort) do
     rating_stats = Reports.rating_stats_for_year(year)
     ratings = Reports.list_ratings_for_year(year, sort)
+    ratings_count_by_month = Reports.get_ratings_count_by_month(year, year == Date.utc_today.year)
 
     render(conn, "show.html", 
       page_atom: :reports_show,
       year: year,
       ratings: ratings,
       rating_count: rating_stats[:rating_count], 
-      average_score: rating_stats[:average_score]
+      average_score: rating_stats[:average_score],
+      ratings_count_by_month: ratings_count_by_month
     )
   end
 
