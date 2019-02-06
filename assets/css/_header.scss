@@ -35,14 +35,8 @@ nav{
 
 //Active nav styles
 .nav a.active,
-.nav > li:hover > a {
-	font-family: $title_font_family;
+.nav > li:hover > a:not(.btn) {
 	background-color: #223;
 	color: white;
 	text-decoration: none;
-}
-
-//override bootstrap for nav buttons
-.nav>li>a.btn-primary:focus, .nav>li>a.btn-primary:hover{
-	background-color: #265a88;
 }
