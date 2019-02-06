@@ -52,7 +52,7 @@ defmodule MovielistWeb.RatingController do
 
   def show(conn, %{"id" => id}) do
     rating = Admin.get_rating!(id)
-    render(conn, "show.html", rating: rating)
+    render(conn, "show.html", rating: rating, require_modal: true)
   end
 
   def edit(conn, %{"id" => id}) do

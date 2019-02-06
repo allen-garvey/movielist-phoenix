@@ -45,7 +45,7 @@ defmodule MovielistWeb.MovieController do
   def show(conn, %{"id" => id}) do
     movie = Admin.get_movie!(id)
     changeset_is_active = movie |> Admin.change_movie |> Admin.change_movie_is_active(!movie.is_active)
-    render(conn, "show.html", movie: movie, changeset_is_active: changeset_is_active)
+    render(conn, "show.html", movie: movie, changeset_is_active: changeset_is_active, require_modal: true)
   end
 
   def edit(conn, %{"id" => id}) do

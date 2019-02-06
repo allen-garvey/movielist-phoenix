@@ -32,6 +32,7 @@ defmodule MovielistWeb.GenreController do
     movie_stats = Reports.movie_stats_for_genre(id)
     rating_stats = Reports.rating_stats_for_genre(id)
     render(conn, "show.html", genre: genre, 
+                              require_modal: true,
                               movie_count: movie_stats[:movie_count], 
                               average_pre_rating: movie_stats[:average_pre_rating],
                               rating_count: rating_stats[:rating_count],
