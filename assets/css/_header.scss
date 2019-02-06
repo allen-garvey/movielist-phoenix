@@ -1,10 +1,35 @@
+.jumbotron{
+	background-color: #eee;
+	padding: 8px 15px 30px;
+}
+
+header{
+	margin-bottom: 30px;
+}
+
 h1.main_title{
 	font-family: $title_font_family;
 	font-size: 3.998em;
-	margin-left: 10px;
-	margin-top:10px;
+	font-weight: normal;
+	margin: 0 10px 20px;
 	a{
 		color: black;
+	}
+}
+
+nav{
+	ul{
+		display: flex;
+		flex-wrap: wrap;
+		list-style-type: none;
+		margin: 0;
+		padding-left: 0;
+	}
+	//nav-pills styles
+	li a{
+		border-radius: 4px;
+		padding: 12px 15px;
+		color: #337ab7; //don't change color for visited links
 	}
 }
 
@@ -14,12 +39,7 @@ h1.main_title{
 	font-family: $title_font_family;
 	background-color: #223;
 	color: white;
-}
-
-.jumbotron{
-	padding-top:.1px; //otherwise won't extend to top of screen for some reason
-	padding-left: 15px;
-	padding-right: 15px;
+	text-decoration: none;
 }
 
 //override bootstrap for nav buttons
