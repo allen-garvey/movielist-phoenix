@@ -22,14 +22,6 @@
 	z-index: 1;
 }
 .modal{
-	//override bootstrap defaults
-	display: block;
-	left: auto;
-	right: auto;
-	top: auto;
-	bottom: auto;
-
-
 	position: fixed;
 	top: 1em;
 	margin-top: auto;
