@@ -77,3 +77,6 @@ Thumbs.db
 .vscode/*
 *.swp
 *.csv
+
+#dialyzer
+.elixir_ls/*
